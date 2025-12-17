@@ -1,0 +1,120 @@
+{
+  "2110.13179v8": {
+    "title": "Probabilistic Hierarchical Forecasting with Deep Poisson Mixtures",
+    "authors": [
+      "Kin G. Olivares",
+      "O. Nganba Meetei",
+      "Ruijun Ma",
+      "Rohan Reddy",
+      "Mengfei Cao",
+      "Lee Dicker"
+    ],
+    "summary": "Hierarchical forecasting problems arise when time series have a natural group structure, and predictions at multiple levels of aggregation and disaggregation across the groups are needed. In such problems, it is often desired to satisfy the aggregation constraints in a given hierarchy, referred to as hierarchical coherence in the literature. Maintaining coherence while producing accurate forecasts can be a challenging problem, especially in the case of probabilistic forecasting. We present a novel method capable of accurate and coherent probabilistic forecasts for time series when reliable hierarchical information is present. We call it Deep Poisson Mixture Network (DPMN). It relies on the combination of neural networks and a statistical model for the joint distribution of the hierarchical multivariate time series structure. By construction, the model guarantees hierarchical coherence and provides simple rules for aggregation and disaggregation of the predictive distributions. We perform an extensive empirical evaluation comparing the DPMN to other state-of-the-art methods which produce hierarchically coherent probabilistic forecasts on multiple public datasets. Comparing to existing coherent probabilistic models, we obtain a relative improvement in the overall Continuous Ranked Probability Score (CRPS) of 11.8% on Australian domestic tourism data, and 8.1% on the Favorita grocery sales dataset, where time series are grouped with geographical hierarchies or travel intent hierarchies. For San Francisco Bay Area highway traffic, where the series' hierarchical structure is randomly assigned, and their correlations are less informative, our method does not show significant performance differences over statistical baselines.",
+    "pdf_url": "https://arxiv.org/pdf/2110.13179v8",
+    "published": "2021-10-25"
+  },
+  "2509.02113v1": {
+    "title": "HiGraph: A Large-Scale Hierarchical Graph Dataset for Malware Analysis",
+    "authors": [
+      "Han Chen",
+      "Hanchen Wang",
+      "Hongmei Chen",
+      "Ying Zhang",
+      "Lu Qin",
+      "Wenjie Zhang"
+    ],
+    "summary": "The advancement of graph-based malware analysis is critically limited by the absence of large-scale datasets that capture the inherent hierarchical structure of software. Existing methods often oversimplify programs into single level graphs, failing to model the crucial semantic relationship between high-level functional interactions and low-level instruction logic. To bridge this gap, we introduce \\dataset, the largest public hierarchical graph dataset for malware analysis, comprising over \\textbf{200M} Control Flow Graphs (CFGs) nested within \\textbf{595K} Function Call Graphs (FCGs). This two-level representation preserves structural semantics essential for building robust detectors resilient to code obfuscation and malware evolution. We demonstrate HiGraph's utility through a large-scale analysis that reveals distinct structural properties of benign and malicious software, establishing it as a foundational benchmark for the community. The dataset and tools are publicly available at https://higraph.org.",
+    "pdf_url": "https://arxiv.org/pdf/2509.02113v1",
+    "published": "2025-09-02"
+  },
+  "1408.5939v2": {
+    "title": "Planar Induced Subgraphs of Sparse Graphs",
+    "authors": [
+      "Glencora Borradaile",
+      "David Eppstein",
+      "Pingan Zhu"
+    ],
+    "summary": "We show that every graph has an induced pseudoforest of at least $n-m/4.5$ vertices, an induced partial 2-tree of at least $n-m/5$ vertices, and an induced planar subgraph of at least $n-m/5.2174$ vertices. These results are constructive, implying linear-time algorithms to find the respective induced subgraphs. We also show that the size of the largest $K_h$-minor-free graph in a given graph can sometimes be at most $n-m/6+o(m)$.",
+    "pdf_url": "https://arxiv.org/pdf/1408.5939v2",
+    "published": "2014-08-25"
+  },
+  "1402.2589v3": {
+    "title": "Partitioning Perfect Graphs into Stars",
+    "authors": [
+      "Ren\u00e9 van Bevern",
+      "Robert Bredereck",
+      "Laurent Bulteau",
+      "Jiehua Chen",
+      "Vincent Froese",
+      "Rolf Niedermeier",
+      "Gerhard J. Woeginger"
+    ],
+    "summary": "The partition of graphs into \"nice\" subgraphs is a central algorithmic problem with strong ties to matching theory. We study the partitioning of undirected graphs into same-size stars, a problem known to be NP-complete even for the case of stars on three vertices. We perform a thorough computational complexity study of the problem on subclasses of perfect graphs and identify several polynomial-time solvable cases, for example, on interval graphs and bipartite permutation graphs, and also NP-complete cases, for example, on grid graphs and chordal graphs.",
+    "pdf_url": "https://arxiv.org/pdf/1402.2589v3",
+    "published": "2014-02-11"
+  },
+  "0711.2360v2": {
+    "title": "Every longest circuit of a 3-connected, $K_{3,3}$-minor free graph has a chord",
+    "authors": [
+      "E. Birmel\u00e9"
+    ],
+    "summary": "Carsten Thomassen conjectured that every longest circuit in a 3-connected graph has a chord. We prove the conjecture for graphs having no $K_{3,3}$ minor, and consequently for planar graphs.",
+    "pdf_url": "https://arxiv.org/pdf/0711.2360v2",
+    "published": "2007-11-15"
+  },
+  "2107.01994v1": {
+    "title": "Template-Based Graph Clustering",
+    "authors": [
+      "Mateus Riva",
+      "Florian Yger",
+      "Pietro Gori",
+      "Roberto M. Cesar",
+      "Isabelle Bloch"
+    ],
+    "summary": "We propose a novel graph clustering method guided by additional information on the underlying structure of the clusters (or communities). The problem is formulated as the matching of a graph to a template with smaller dimension, hence matching $n$ vertices of the observed graph (to be clustered) to the $k$ vertices of a template graph, using its edges as support information, and relaxed on the set of orthonormal matrices in order to find a $k$ dimensional embedding. With relevant priors that encode the density of the clusters and their relationships, our method outperforms classical methods, especially for challenging cases.",
+    "pdf_url": "https://arxiv.org/pdf/2107.01994v1",
+    "published": "2021-07-05"
+  },
+  "2007.10908v1": {
+    "title": "Robust Hierarchical Graph Classification with Subgraph Attention",
+    "authors": [
+      "Sambaran Bandyopadhyay",
+      "Manasvi Aggarwal",
+      "M. Narasimha Murty"
+    ],
+    "summary": "Graph neural networks get significant attention for graph representation and classification in machine learning community. Attention mechanism applied on the neighborhood of a node improves the performance of graph neural networks. Typically, it helps to identify a neighbor node which plays more important role to determine the label of the node under consideration. But in real world scenarios, a particular subset of nodes together, but not the individual pairs in the subset, may be important to determine the label of the graph. To address this problem, we introduce the concept of subgraph attention for graphs. On the other hand, hierarchical graph pooling has been shown to be promising in recent literature. But due to noisy hierarchical structure of real world graphs, not all the hierarchies of a graph play equal role for graph classification. Towards this end, we propose a graph classification algorithm called SubGattPool which jointly learns the subgraph attention and employs two different types of hierarchical attention mechanisms to find the important nodes in a hierarchy and the importance of individual hierarchies in a graph. Experimental evaluation with different types of graph classification algorithms shows that SubGattPool is able to improve the state-of-the-art or remains competitive on multiple publicly available graph classification datasets. We conduct further experiments on both synthetic and real world graph datasets to justify the usefulness of different components of SubGattPool and to show its consistent performance on other downstream tasks.",
+    "pdf_url": "https://arxiv.org/pdf/2007.10908v1",
+    "published": "2020-07-19"
+  },
+  "1408.6321v1": {
+    "title": "Crossing Minimization for 1-page and 2-page Drawings of Graphs with Bounded Treewidth",
+    "authors": [
+      "Michael J. Bannister",
+      "David Eppstein"
+    ],
+    "summary": "We investigate crossing minimization for 1-page and 2-page book drawings. We show that computing the 1-page crossing number is fixed-parameter tractable with respect to the number of crossings, that testing 2-page planarity is fixed-parameter tractable with respect to treewidth, and that computing the 2-page crossing number is fixed-parameter tractable with respect to the sum of the number of crossings and the treewidth of the input graph. We prove these results via Courcelle's theorem on the fixed-parameter tractability of properties expressible in monadic second order logic for graphs of bounded treewidth.",
+    "pdf_url": "https://arxiv.org/pdf/1408.6321v1",
+    "published": "2014-08-27"
+  },
+  "1408.1422v1": {
+    "title": "The Galois Complexity of Graph Drawing: Why Numerical Solutions are Ubiquitous for Force-Directed, Spectral, and Circle Packing Drawings",
+    "authors": [
+      "Michael J. Bannister",
+      "William E. Devanny",
+      "David Eppstein",
+      "Michael T. Goodrich"
+    ],
+    "summary": "Many well-known graph drawing techniques, including force directed drawings, spectral graph layouts, multidimensional scaling, and circle packings, have algebraic formulations. However, practical methods for producing such drawings ubiquitously use iterative numerical approximations rather than constructing and then solving algebraic expressions representing their exact solutions. To explain this phenomenon, we use Galois theory to show that many variants of these problems have solutions that cannot be expressed by nested radicals or nested roots of low-degree polynomials. Hence, such solutions cannot be computed exactly even in extended computational models that include such operations.",
+    "pdf_url": "https://arxiv.org/pdf/1408.1422v1",
+    "published": "2014-08-06"
+  },
+  "1901.05839v1": {
+    "title": "Hamiltonian chromatic number of block graphs",
+    "authors": [
+      "Devsi Bantva"
+    ],
+    "summary": "Let $G$ be a simple connected graph of order $n$. A hamiltonian coloring $c$ of a graph $G$ is an assignment of colors (non-negative integers) to the vertices of $G$ such that $D(u, v)$ + $|c(u) - c(v)|$ $\\geq$ $n - 1$ for every two distinct vertices $u$ and $v$ of $G$, where $D(u, v)$ denotes the detour distance between $u$ and $v$ in $G$ which is the length of the longest path between $u$ and $v$. The value \\emph{hc(c)} of a hamiltonian coloring $c$ is the maximum color assigned to a vertex of $G$. The hamiltonian chromatic number, denoted by $hc(G)$, is min\\{$hc(c)$\\} taken over all hamiltonian coloring $c$ of $G$. In this paper, we give a necessary and sufficient condition to achieve a lower bound for the hamiltonian chromatic number of block graphs given in [Theorem 1,On Hamiltonian Colorings of Block graphs, In: Kaykobad, M., Petrechi, R., (eds.) WALCOM: Algorithms and Computation, LNCS: 9627, 28-39, 2016]. We present an algorithm for optimal hamiltonian coloring of a special class of block graphs, namely $SDB(p/2)$ block graphs. We characterize level-wise regular block graphs and extended star of blocks achieving this lower bound.",
+    "pdf_url": "https://arxiv.org/pdf/1901.05839v1",
+    "published": "2019-01-17"
+  }
+}

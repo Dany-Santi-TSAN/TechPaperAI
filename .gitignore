@@ -1,0 +1,7 @@
+.env
+
+# file
+*Zone.Identifier
+
+# python environement
+.python-version

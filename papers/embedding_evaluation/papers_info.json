@@ -1,0 +1,127 @@
+{
+  "2203.02679v2": {
+    "title": "Just Rank: Rethinking Evaluation with Word and Sentence Similarities",
+    "authors": [
+      "Bin Wang",
+      "C. -C. Jay Kuo",
+      "Haizhou Li"
+    ],
+    "summary": "Word and sentence embeddings are useful feature representations in natural language processing. However, intrinsic evaluation for embeddings lags far behind, and there has been no significant update since the past decade. Word and sentence similarity tasks have become the de facto evaluation method. It leads models to overfit to such evaluations, negatively impacting embedding models' development. This paper first points out the problems using semantic similarity as the gold standard for word and sentence embedding evaluations. Further, we propose a new intrinsic evaluation method called EvalRank, which shows a much stronger correlation with downstream tasks. Extensive experiments are conducted based on 60+ models and popular datasets to certify our judgments. Finally, the practical evaluation toolkit is released for future benchmarking purposes.",
+    "pdf_url": "https://arxiv.org/pdf/2203.02679v2",
+    "published": "2022-03-05"
+  },
+  "2505.06386v2": {
+    "title": "Embedding Atlas: Low-Friction, Interactive Embedding Visualization",
+    "authors": [
+      "Donghao Ren",
+      "Fred Hohman",
+      "Halden Lin",
+      "Dominik Moritz"
+    ],
+    "summary": "Embedding projections are popular for visualizing large datasets and models. However, people often encounter \"friction\" when using embedding visualization tools: (1) barriers to adoption, e.g., tedious data wrangling and loading, scalability limits, no integration of results into existing workflows, and (2) limitations in possible analyses, without integration with external tools to additionally show coordinated views of metadata. In this paper, we present Embedding Atlas, a scalable, interactive visualization tool designed to make interacting with large embeddings as easy as possible. Embedding Atlas uses modern web technologies and advanced algorithms -- including density-based clustering, and automated labeling -- to provide a fast and rich data analysis experience at scale. We evaluate Embedding Atlas with a competitive analysis against other popular embedding tools, showing that Embedding Atlas's feature set specifically helps reduce friction, and report a benchmark on its real-time rendering performance with millions of points. Embedding Atlas is available as open source to support future work in embedding-based analysis.",
+    "pdf_url": "https://arxiv.org/pdf/2505.06386v2",
+    "published": "2025-05-09"
+  },
+  "1006.3863v2": {
+    "title": "Normalization of peer-evaluation measures of group research quality across academic disciplines",
+    "authors": [
+      "Ralph Kenna",
+      "Bertrand Berche"
+    ],
+    "summary": "Peer-evaluation based measures of group research quality such as the UK's Research Assessment Exercise (RAE), which do not employ bibliometric analyses, cannot directly avail of such methods to normalize research impact across disciplines. This is seen as a conspicuous flaw of such exercises and calls have been made to find a remedy. Here a simple, systematic solution is proposed based upon a mathematical model for the relationship between research quality and group quantity. This model manifests both the Matthew effect and a phenomenon akin to the Ringelmann effect and reveals the existence of two critical masses for each academic discipline: a lower value, below which groups are vulnerable, and an upper value beyond which the dependency of quality on quantity reduces and plateaus appear when the critical masses are large. A possible normalization procedure is then to pitch these plateaus at similar levels. We examine the consequences of this procedure at RAE for a multitude of academic disciplines, corresponding to a range of critical masses.",
+    "pdf_url": "https://arxiv.org/pdf/1006.3863v2",
+    "published": "2010-06-19"
+  },
+  "2511.08480v1": {
+    "title": "Compression then Matching: An Efficient Pre-training Paradigm for Multimodal Embedding",
+    "authors": [
+      "Da Li",
+      "Yuxiao Luo",
+      "Keping Bi",
+      "Jiafeng Guo",
+      "Wei Yuan",
+      "Biao Yang",
+      "Yan Wang",
+      "Fan Yang",
+      "Tingting Gao",
+      "Guorui Zhou"
+    ],
+    "summary": "Vision-language models advance multimodal representation learning by acquiring transferable semantic embeddings, thereby substantially enhancing performance across a range of vision-language tasks, including cross-modal retrieval, clustering, and classification. An effective embedding is expected to comprehensively preserve the semantic content of the input while simultaneously emphasizing features that are discriminative for downstream tasks. Recent approaches demonstrate that VLMs can be adapted into competitive embedding models via large-scale contrastive learning, enabling the simultaneous optimization of two complementary objectives. We argue that the two aforementioned objectives can be decoupled: a comprehensive understanding of the input facilitates the embedding model in achieving superior performance in downstream tasks via contrastive learning. In this paper, we propose CoMa, a compressed pre-training phase, which serves as a warm-up stage for contrastive learning. Experiments demonstrate that with only a small amount of pre-training data, we can transform a VLM into a competitive embedding model. CoMa achieves new state-of-the-art results among VLMs of comparable size on the MMEB, realizing optimization in both efficiency and effectiveness.",
+    "pdf_url": "https://arxiv.org/pdf/2511.08480v1",
+    "published": "2025-11-11"
+  },
+  "2311.18580v2": {
+    "title": "FFT: Towards Harmlessness Evaluation and Analysis for LLMs with Factuality, Fairness, Toxicity",
+    "authors": [
+      "Shiyao Cui",
+      "Zhenyu Zhang",
+      "Yilong Chen",
+      "Wenyuan Zhang",
+      "Tianyun Liu",
+      "Siqi Wang",
+      "Tingwen Liu"
+    ],
+    "summary": "The widespread of generative artificial intelligence has heightened concerns about the potential harms posed by AI-generated texts, primarily stemming from factoid, unfair, and toxic content. Previous researchers have invested much effort in assessing the harmlessness of generative language models. However, existing benchmarks are struggling in the era of large language models (LLMs), due to the stronger language generation and instruction following capabilities, as well as wider applications. In this paper, we propose FFT, a new benchmark with 2116 elaborated-designed instances, for LLM harmlessness evaluation with factuality, fairness, and toxicity. To investigate the potential harms of LLMs, we evaluate 9 representative LLMs covering various parameter scales, training stages, and creators. Experiments show that the harmlessness of LLMs is still under-satisfactory, and extensive analysis derives some insightful findings that could inspire future research for harmless LLM research.",
+    "pdf_url": "https://arxiv.org/pdf/2311.18580v2",
+    "published": "2023-11-30"
+  },
+  "1411.4358v3": {
+    "title": "Cosets, Voltages, and Derived Embeddings",
+    "authors": [
+      "Steven Schluchter"
+    ],
+    "summary": "An ordinary voltage graph embedding of a graph in a surface encodes a certain kind of highly symmetric covering space of that surface. Given an ordinary voltage graph embedding of a graph $G$ in a surface with voltage group $A$ and a connected subgraph $H$ of $G$, we define special subgroups of $A$ that depend on $H$ and show how cosets of these groups in $A$ can be used to find topological information concerning the derived embedding without constructing the whole covering space. Our strongest theorems treat the case that $H$ is a cycle and the fiber over $H$ is a disjoint union of cycles with annular neighborhoods, in which case we are able to deduce specific symmetry properties of the derived embeddings. We give infinite families of examples that demonstrate the usefulness of our results.",
+    "pdf_url": "https://arxiv.org/pdf/1411.4358v3",
+    "published": "2014-11-17"
+  },
+  "2505.15624v1": {
+    "title": "Mechanistic Insights into Grokking from the Embedding Layer",
+    "authors": [
+      "H. V. AlquBoj",
+      "Hilal AlQuabeh",
+      "Velibor Bojkovic",
+      "Munachiso Nwadike",
+      "Kentaro Inui"
+    ],
+    "summary": "Grokking, a delayed generalization in neural networks after perfect training performance, has been observed in Transformers and MLPs, but the components driving it remain underexplored. We show that embeddings are central to grokking: introducing them into MLPs induces delayed generalization in modular arithmetic tasks, whereas MLPs without embeddings can generalize immediately. Our analysis identifies two key mechanisms: (1) Embedding update dynamics, where rare tokens stagnate due to sparse gradient updates and weight decay, and (2) Bilinear coupling, where the interaction between embeddings and downstream weights introduces saddle points and increases sensitivity to initialization. To confirm these mechanisms, we investigate frequency-aware sampling, which balances token updates by minimizing gradient variance, and embedding-specific learning rates, derived from the asymmetric curvature of the bilinear loss landscape. We prove that an adaptive learning rate ratio, \\(\\frac{\u03b7_E}{\u03b7_W} \\propto \\frac{\u03c3_{\\max}(E)}{\u03c3_{\\max}(W)} \\cdot \\frac{f_W}{f_E}\\), mitigates bilinear coupling effects, accelerating convergence. Our methods not only improve grokking dynamics but also extend to broader challenges in Transformer optimization, where bilinear interactions hinder efficient training.",
+    "pdf_url": "https://arxiv.org/pdf/2505.15624v1",
+    "published": "2025-05-21"
+  },
+  "2008.13454v1": {
+    "title": "Complex-valued embeddings of generic proximity data",
+    "authors": [
+      "Maximilian M\u00fcnch",
+      "Michiel Straat",
+      "Michael Biehl",
+      "Frank-Michael Schleif"
+    ],
+    "summary": "Proximities are at the heart of almost all machine learning methods. If the input data are given as numerical vectors of equal lengths, euclidean distance, or a Hilbertian inner product is frequently used in modeling algorithms. In a more generic view, objects are compared by a (symmetric) similarity or dissimilarity measure, which may not obey particular mathematical properties. This renders many machine learning methods invalid, leading to convergence problems and the loss of guarantees, like generalization bounds. In many cases, the preferred dissimilarity measure is not metric, like the earth mover distance, or the similarity measure may not be a simple inner product in a Hilbert space but in its generalization a Krein space. If the input data are non-vectorial, like text sequences, proximity-based learning is used or ngram embedding techniques can be applied. Standard embeddings lead to the desired fixed-length vector encoding, but are costly and have substantial limitations in preserving the original data's full information. As an information preserving alternative, we propose a complex-valued vector embedding of proximity data. This allows suitable machine learning algorithms to use these fixed-length, complex-valued vectors for further processing. The complex-valued data can serve as an input to complex-valued machine learning algorithms. In particular, we address supervised learning and use extensions of prototype-based learning. The proposed approach is evaluated on a variety of standard benchmarks and shows strong performance compared to traditional techniques in processing non-metric or non-psd proximity data.",
+    "pdf_url": "https://arxiv.org/pdf/2008.13454v1",
+    "published": "2020-08-31"
+  },
+  "1911.01196v1": {
+    "title": "Spherical Text Embedding",
+    "authors": [
+      "Yu Meng",
+      "Jiaxin Huang",
+      "Guangyuan Wang",
+      "Chao Zhang",
+      "Honglei Zhuang",
+      "Lance Kaplan",
+      "Jiawei Han"
+    ],
+    "summary": "Unsupervised text embedding has shown great power in a wide range of NLP tasks. While text embeddings are typically learned in the Euclidean space, directional similarity is often more effective in tasks such as word similarity and document clustering, which creates a gap between the training stage and usage stage of text embedding. To close this gap, we propose a spherical generative model based on which unsupervised word and paragraph embeddings are jointly learned. To learn text embeddings in the spherical space, we develop an efficient optimization algorithm with convergence guarantee based on Riemannian optimization. Our model enjoys high efficiency and achieves state-of-the-art performances on various text embedding tasks including word similarity and document clustering.",
+    "pdf_url": "https://arxiv.org/pdf/1911.01196v1",
+    "published": "2019-11-04"
+  },
+  "2410.10814v2": {
+    "title": "Your Mixture-of-Experts LLM Is Secretly an Embedding Model For Free",
+    "authors": [
+      "Ziyue Li",
+      "Tianyi Zhou"
+    ],
+    "summary": "While large language models (LLMs) excel on generation tasks, their decoder-only architecture often limits their potential as embedding models if no further representation finetuning is applied. Does this contradict their claim of generalists? To answer the question, we take a closer look at Mixture-of-Experts (MoE) LLMs. Our study shows that the expert routers in MoE LLMs can serve as an off-the-shelf embedding model with promising performance on a diverse class of embedding-focused tasks, without requiring any finetuning. Moreover, our extensive analysis shows that the MoE routing weights (RW) is complementary to the hidden state (HS) of LLMs, a widely-used embedding. Compared to HS, we find that RW is more robust to the choice of prompts and focuses on high-level semantics. Motivated by the analysis, we propose MoEE combining RW and HS, which achieves better performance than using either separately. Our exploration of their combination and prompting strategy shed several novel insights, e.g., a weighted sum of RW and HS similarities outperforms the similarity on their concatenation. Our experiments are conducted on 6 embedding tasks with 20 datasets from the Massive Text Embedding Benchmark (MTEB). The results demonstrate the significant improvement brought by MoEE to LLM-based embedding without further finetuning.",
+    "pdf_url": "https://arxiv.org/pdf/2410.10814v2",
+    "published": "2024-10-14"
+  }
+}

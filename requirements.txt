@@ -1,0 +1,13 @@
+dotenv
+langchain
+
+anthropic
+mcp
+arxiv
+node
+
+streamlit
+uvicorn
+nest_asyncio
+asyncio
+mcp-server-fetch
