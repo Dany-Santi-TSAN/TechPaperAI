@@ -2,6 +2,12 @@
 
 # file
 *Zone.Identifier
-
-# python environement
 .python-version
+*.pyc
+
+# folder
+PAPER_DIR
+papers/
+*venv*
+.venv/
+__pycache__/
