@@ -8,7 +8,7 @@ import json
 import asyncio
 import nest_asyncio
 
-from llm_config import LLMConfig
+from config.llm_config import LLMConfig
 
 nest_asyncio.apply()
 load_dotenv()
@@ -32,6 +32,8 @@ class MCP_ChatBot:
         self.anthropic = Anthropic(api_key=self.config.anthropic_key)
         self.available_tools: List[ToolDefinition] = []
         self.tool_to_session: Dict[str, ClientSession] = {}
+        self.available_resources: Dict[str, ClientSession] = {}
+        self.available_prompts: Dict[str, ClientSession] = {}
 
     async def connect_to_server(self, server_name: str, server_config: dict) -> None:
         """
@@ -70,6 +72,24 @@ class MCP_ChatBot:
         except Exception as e:
             print(f"❌ Failed to connect to '{server_name}': {e}")
 
+        # Register resources in session
+        try:
+            resources_response = await session.list_resources()
+            for resource in resources_response.resources:
+                self.available_resources[resource.uri] = session
+
+        except Exception as e:
+            print(f" No resources from '{server_name}' : {e}")
+
+        # Register prompts in session
+        try :
+            prompts_response = await session.list_prompts()
+            for prompt in prompts_response.prompts:
+                self.available_prompts[prompt.name] = session
+
+        except Exception as e:
+            print (f"No prompt available from '{server_name}' : {e}")
+
 
     async def connect_to_multiple_servers(self) -> None:
         """Connect to all configured MCP servers from server_config.json."""
@@ -95,35 +115,30 @@ class MCP_ChatBot:
             print(f"❌ Error loading config: {e}")
             raise
 
-    async def list_prompts(self):
-        """Display all prompts."""
-        try:
-            session = self.sessions[0]
-            prompts_response = await session.list_prompts()
+    async def get_resource(self, uri: str) -> str:
+        """Read resource by URI"""
+        session = self.available_resources.get(uri)
+        print(f"DEBUG {session}")
+        print(f"DEBUG uri : {uri} ")
+        if session:
+            result = await session.read_resource(uri)
+            return result.contents[0].text if result.contents else str(result)
+        return f"Resource not found: {uri}"
 
-            print("\n📝 Available prompts:")
-            for prompt in prompts_response.prompts:
-                print(f"  • {prompt.name}")
-                if prompt.description:
-                    print(f"    {prompt.description}")
-        except Exception as e:
-            print(f"❌ Error listing prompts: {e}")
+
+    async def list_prompts(self):
+        """Display all prompts"""
+        print("\n Available prompts:")
+        for name in self.available_prompts.keys():
+            print(f"{name}")
 
     async def execute_prompt(self, prompt_name: str, arguments: dict):
-        """Execute prompt - MCP routes automatically."""
-        try:
-            session = self.sessions[0]
+        """Execute prompt"""
+        session = self.available_prompts.get(prompt_name)
+        if session:
             result = await session.get_prompt(prompt_name, arguments=arguments)
-
-            if result.messages:
-                prompt_text = result.messages[0].content.text
-                await self.process_query(prompt_text)
-            else:
-                print(f"⚠️ Empty prompt result: {prompt_name}")
-
-        except Exception as e:
-            print(f"❌ Error executing prompt '{prompt_name}': {e}")
-
+            prompt_text = result.messages[0].content.text
+            await self.process_query(prompt_text)
 
     async def process_query(self, query: str) -> None:
         """
@@ -220,13 +235,14 @@ class MCP_ChatBot:
         print("🤖 MCP Multi-Server ChatBot Ready!")
         print("=" * 60)
         print(f"📊 Total tools: {len(self.available_tools)}")
-        print("-" * 10)
+        print(f"📚 Resources: {len(self.available_resources)}")
+        print(f"📝 Prompts: {len(self.available_prompts)}")
         print("\nCommands:")
         print("  @folders               - List available topics")
         print("  @{topic}               - Get papers for a topic")
         print("  /prompts               - List available prompts")
-        print("  /prompts topic={name} num_papers{args}  - Execute a prompt")
-        print("  example : /prompts generate_search_prompt topic=quantum num_papers=3")
+        print("  /prompt topic={name} num_papers{args}  - Execute a prompt")
+        print("  example : /prompt generate_search_prompt topic=quantum num_papers=3")
         print()
         print("Type 'quit' to exit.\n")
 
@@ -242,24 +258,16 @@ class MCP_ChatBot:
                     continue
 
                 if query.startswith("@"):
-                    resource_name = query[1:].strip().lower().replace(" ", "_")
+                    resource_name = query[1:]
                     uri = "papers://folders" if resource_name == "folders" else f"papers://{resource_name}"
-
-                    session = self.sessions[0]  # MCP route la ressource
-                    result = await session.read_resource(uri)
-
-                    if result.contents:
-                        print(result.contents[0].text)
-                    else:
-                        print(f"⚠️ Empty resource: {uri}")
-
+                    print(await self.get_resource(uri))
                     continue
 
                 elif query == "/prompts":
                     await self.list_prompts()
                     continue
 
-                elif query.startswith("/prompts"):
+                elif query.startswith("/prompt"):
                     query_parts = query.split()
                     name = query_parts[1]
                     args = dict(p.split("=") for p in query_parts[2:] if "=" in p)

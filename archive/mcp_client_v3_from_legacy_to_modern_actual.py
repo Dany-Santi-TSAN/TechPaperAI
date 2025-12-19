@@ -8,7 +8,7 @@ import json
 import asyncio
 import nest_asyncio
 
-from llm_config import LLMConfig
+from config.llm_config import LLMConfig
 
 nest_asyncio.apply()
 load_dotenv()

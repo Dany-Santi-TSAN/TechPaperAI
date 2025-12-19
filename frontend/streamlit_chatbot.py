@@ -1,5 +1,5 @@
 import streamlit as st
-from chatbot_mcp import MCP_ChatBot
+from core.mcp_client import MCP_ChatBot
 
 
 st.set_page_config(
@@ -13,14 +13,16 @@ st.title("TechPaper AI")
 st.header("Your eyes on the frontier of tech research.")
 st.subheader("Scan, summarize, and stay ahead -> automatically")
 
-# Interface de chat simple
+chatbot = MCP_ChatBot
+
+# Chatbot UI
 with st.chat_message("assistant"):
     st.write("Bonjour! Comment puis-je vous aider?")
 
 with st.chat_message("user"):
     st.write("Your Query here: ")
 
-# Input de chat
+# Input in chat
 prompt = st.chat_input("Your Query here:")
 if prompt:
     st.write(f"Vous avez dit: {prompt}")

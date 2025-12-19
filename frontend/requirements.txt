@@ -1,0 +1,14 @@
+# UI streamlit
+streamlit==1.52.1
+
+# LLM
+anthropic==0.75.0
+
+# MCP Client
+mcp==1.23.3
+
+# Config
+python-dotenv==1.2.1
+
+# Async support
+nest-asyncio==1.6.0
