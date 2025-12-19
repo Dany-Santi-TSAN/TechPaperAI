@@ -2,7 +2,7 @@
   "mcpServers": {
     "research": {
       "command": "python",
-      "args": ["research_server.py"]
+      "args": ["backend/research_server.py"]
     },
     "filesystem": {
       "command": "npx",

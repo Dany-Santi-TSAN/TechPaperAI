@@ -8,7 +8,7 @@ from fastmcp import FastMCP
 PAPER_DIR = "papers"
 
 # Initialize FastMCP server
-mcp = FastMCP("research", port=8080)
+mcp = FastMCP("research")
 
 @mcp.tool()
 def search_papers(topic: str, max_results: int = 5) -> List[str]:
@@ -198,5 +198,10 @@ Present both detailed paper info and high-level synthesis of the research landsc
 
 
 if __name__ == "__main__":
-    # Initialize and run the server
-    mcp.run(transport="http-stream")
+    import os
+    # Initialize and run sse
+    mcp.run(
+        transport="sse",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", 8001))
+    )
