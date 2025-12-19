@@ -64,7 +64,6 @@ markdown-it-py==4.0.0
 markdownify==1.2.2
 MarkupSafe==3.0.3
 mcp==1.23.3
-mcp-server-fetch==2025.4.7
 mdurl==0.1.2
 more-itertools==10.8.0
 narwhals==2.13.0
