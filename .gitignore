@@ -11,3 +11,4 @@ papers/
 *venv*
 .venv/
 __pycache__/
+*.log
