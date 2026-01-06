@@ -155,7 +155,7 @@ class MCPRemoteStreamlitClient:
 
         # Agentic loop
         while response.stop_reason == "tool_use":
-            interation += 1
+            iteration += 1
             logger.info(f"ITERATION {iteration} Start")
 
             assistant_content = []
