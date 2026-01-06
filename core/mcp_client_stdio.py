@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from anthropic import Anthropic
 from mcp import ClientSession, StdioServerParameters
+from mcp import SamplingMessageContentBlock, SamplingToolsCapability
 from mcp.client.stdio import stdio_client
 from typing import List, Dict, TypedDict
 from contextlib import AsyncExitStack
@@ -21,7 +22,7 @@ class ToolDefinition(TypedDict):
     input_schema: dict
 
 
-class MCP_ChatBot:
+class MCPChatBot:
     """Multi-server MCP ChatBot with resources and prompts support."""
 
     def __init__(self, config: LLMConfig = None):
@@ -284,7 +285,7 @@ class MCP_ChatBot:
 
 async def main():
     """Main entry point."""
-    chatbot = MCP_ChatBot()
+    chatbot = MCPChatBot()
     try:
         await chatbot.connect_to_multiple_servers()
         await chatbot.chat_loop()
