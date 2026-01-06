@@ -85,8 +85,7 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
         }
         papers_info[paper_id] = paper_info
 
-    # track return
-    results.append(f"{paper_id} - {paper_info['title']}")
+        results.append(f"{paper_id} - {paper_info['title']}")
 
     # Save updated papers_info to json file
     with open(file_path, "w", encoding="utf-8") as json_file:
