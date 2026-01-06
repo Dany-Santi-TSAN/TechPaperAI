@@ -48,7 +48,12 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
 
     logger.info("Fetching results...")
     papers = client.results(search)
-    logger.info(f"Type: {type(papers)}")
+
+    papers_list = []
+    for p in papers:
+        papers_list.append(p)
+
+    logger.info(f"✅ Got {len(papers_list)} papers")
 
     # Create directory for this topic
     path = os.path.join(PAPER_DIR, topic.lower().replace(" ", "_"))
@@ -65,8 +70,12 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
 
     # Process each paper and add to papers_info
     paper_ids = []
-    for paper in papers:
-        paper_ids.append(paper.get_short_id())
+    new_results = []
+
+    for paper in papers_list:
+        paper_id = paper.get_short_id()
+        paper_ids.append(paper_id)
+
         paper_info = {
             "title": paper.title
             ,"authors": [author.name for author in paper.authors]
@@ -74,19 +83,18 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
             ,"pdf_url": paper.pdf_url
             ,"published": str(paper.published.date())
         }
-        papers_info[paper.get_short_id()] = paper_info
+        papers_info[paper_id] = paper_info
+
+    # track return
+    new_results.append(f"{paper_id} - {paper_info['title']}")
 
     # Save updated papers_info to json file
-    with open(file_path, "w") as json_file:
-        json.dump(papers_info, json_file, indent=2)
+    with open(file_path, "w", encoding="utf-8") as json_file:
+        json.dump(papers_info, json_file, indent=2, ensure_ascii=False)
 
-    print(f"Results are saved in :{file_path}")
+    logger.info(f"Results are saved in :{file_path}")
 
-    result_display = [
-    f"{paper_id} - {info['title']} - {info['published']}"
-    for paper_id, info in papers_info.items()
-    ]
-    return result_display
+    return new_results
 
 
 @mcp.tool()
