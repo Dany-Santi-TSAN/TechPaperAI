@@ -81,5 +81,7 @@ if prompt:
             status.update(label="✅ Complete!", state="complete")
             st.write(response)
 
+        st.session_state.messages.append({"role": "assistant", "content": response})
+
 
 st.caption("L'IA peut faire des erreurs. Veuillez vérifier les réponses")
