@@ -70,7 +70,7 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
 
     # Process each paper and add to papers_info
     paper_ids = []
-    new_results = []
+    results = []
 
     for paper in papers_list:
         paper_id = paper.get_short_id()
@@ -86,7 +86,7 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
         papers_info[paper_id] = paper_info
 
     # track return
-    new_results.append(f"{paper_id} - {paper_info['title']}")
+    results.append(f"{paper_id} - {paper_info['title']}")
 
     # Save updated papers_info to json file
     with open(file_path, "w", encoding="utf-8") as json_file:
@@ -94,7 +94,7 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
 
     logger.info(f"Results are saved in :{file_path}")
 
-    return new_results
+    return results
 
 
 @mcp.tool()
