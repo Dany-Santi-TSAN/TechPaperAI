@@ -7,12 +7,20 @@ from typing import List, Dict, TypedDict, Callable, Optional
 from contextlib import AsyncExitStack
 import asyncio
 import nest_asyncio
+import logging
 
 from config.llm_config import LLMConfig
 from config.sse_config import SseConfigSTClient
 
 nest_asyncio.apply()
 load_dotenv()
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s'
+)
+
+logger = logging.getLogger(__name__)
 
 
 class ToolDefinition(TypedDict):
@@ -131,6 +139,9 @@ class MCPRemoteStreamlitClient:
         MAX_TOOL_CALL = self.config.max_tool_call
         tool_call_counter = {}
 
+        logger.info(f"NEW Query: {query[:200]}...")
+        logger.info(f"MAX_TOOL_CALL limit: {MAX_TOOL_CALL}")
+
         messages = [{"role": "user", "content": query}]
 
         if on_update:
@@ -138,9 +149,14 @@ class MCPRemoteStreamlitClient:
 
         # Initial LLM call
         response = await self._call_llm_sync(messages)
+        logger.info(f"Initial stop_reason: {response.stop_reason}")
+
+        iteration = 0
 
         # Agentic loop
         while response.stop_reason == "tool_use":
+            interation += 1
+            logger.info(f"ITERATION {iteration} Start")
 
             assistant_content = []
             tool_results_content = []
@@ -158,6 +174,18 @@ class MCPRemoteStreamlitClient:
                     tool_name = content.name
                     tool_args = content.input
                     tool_id = content.id
+
+                    current_count = tool_call_counter.get(tool_name, 0) + 1
+                    logger.info(f" Tool: {tool_name} called {current_count} /{MAX_TOOL_CALL}")
+                    logger.info(f" Args: {tool_args}")
+
+                    tool_call_counter[tool_name] = current_count
+
+                    if current_count > MAX_TOOL_CALL:
+                        logger.warning(f"⚠️ Tool '{tool_name} BLOKED (limited reached)")
+                        if on_update:
+                            on_update(f"⚠️ Tool '{tool_name}' call limit reached. Skipping")
+                        continue
 
                     # Guardrail 1 - Count per tool
 
@@ -199,7 +227,10 @@ class MCPRemoteStreamlitClient:
             # Prevents useless extra LLM calls
             ###################################
             if not tool_results_content:
+                logger.warning("⚠️ No tool results - BREAKING loop")
                 break
+
+            logger.info(f"✅ Got {len(tool_results_content)} tool result(s)")
 
             # Append assistant + tool results
             messages.append(
@@ -229,6 +260,7 @@ class MCPRemoteStreamlitClient:
 
             # Next LLM call
             response = await self._call_llm_sync(messages)
+            logger.info(f" Next stop_reason: {response.stop_reason}")
 
         # Final response
         final_text = "".join(
@@ -237,6 +269,7 @@ class MCPRemoteStreamlitClient:
             if content.type == "text"
         )
 
+        logger.info(f" DOne - Total iterations: {iteration}")
         return final_text
 
     async def cleanup(self) -> None:
