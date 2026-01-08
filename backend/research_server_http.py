@@ -35,7 +35,16 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
 
     # Use arXiv to find the papers
     logger.info("Connecting to ArXiv...")
-    client = arxiv.Client()
+    client = arxiv.Client(
+        page_size=10
+        ,delay_seconds= 3
+        ,num_retries=3
+    )
+
+    client._session.headers.update(
+        {'User-Agent': 'TechPaperAI/v0.1 (dany.tsan.data@gmail.com ; Learning Agentic MCP Project ; Non-Commercial)'
+         ,'From': 'dany.tsan.data@gmail.com'}
+    )
     logger.info("✅ ArXiv connected...")
 
     # Search for the most relevant articles matching the queried topic
