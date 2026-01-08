@@ -232,7 +232,7 @@ if __name__ == "__main__":
     import os
     # Initialize and run StreamableHTTP transport
     mcp.run(
-        transport="http",
+        transport="streamable-http",
         host="0.0.0.0",
         port=int(os.getenv("PORT", 8001))
     )
