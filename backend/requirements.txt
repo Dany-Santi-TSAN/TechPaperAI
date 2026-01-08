@@ -1,5 +1,8 @@
 # Backend
 fastmcp==2.14.0
+mcp==1.23.3
+httpx==0.28.1
+
 arxiv==2.3.1
 
 # Format, lint, typing

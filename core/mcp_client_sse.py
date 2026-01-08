@@ -210,10 +210,13 @@ class MCPRemoteStreamlitClient:
                         continue
 
                     # Tool call is already async
+                    logger.info(f"Calling tool via MCP session...")
                     tool_result = await session.call_tool(
                         tool_name,
                         arguments=tool_args,
                     )
+                    logger.info(f"✅ Tool result received : {type(tool_result)} ")
+                    logger.info(f"   Content: {tool_result.content[:200]}...")
 
                     tool_results_content.append(
                         {
@@ -269,7 +272,7 @@ class MCPRemoteStreamlitClient:
             if content.type == "text"
         )
 
-        logger.info(f" DOne - Total iterations: {iteration}")
+        logger.info(f"✅ Done - Total iterations: {iteration}")
         return final_text
 
     async def cleanup(self) -> None:
