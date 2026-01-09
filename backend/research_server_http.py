@@ -37,7 +37,7 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
     logger.info("Connecting to ArXiv...")
     client = arxiv.Client(
         page_size=10
-        ,delay_seconds= 3
+        ,delay_seconds=3.5
         ,num_retries=3
     )
 
@@ -79,14 +79,14 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
 
     # Process each paper and add to papers_info
     paper_ids = []
-    results = []
 
     for paper in papers_list:
         paper_id = paper.get_short_id()
         paper_ids.append(paper_id)
 
         paper_info = {
-            "title": paper.title
+            "id": paper_id
+            ,"title": paper.title
             ,"authors": [author.name for author in paper.authors]
             ,"summary": paper.summary
             ,"pdf_url": paper.pdf_url
@@ -94,7 +94,6 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
         }
         papers_info[paper_id] = paper_info
 
-        results.append(f"{paper_id} - {paper_info['title']}")
 
     # Save updated papers_info to json file
     with open(file_path, "w", encoding="utf-8") as json_file:
@@ -102,7 +101,7 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
 
     logger.info(f"Results are saved in :{file_path}")
 
-    return results
+    return [{"id": p_id, "title": info["title"]} for p_id, info in papers_info.items() if p_id in paper_ids]
 
 
 @mcp.tool()

@@ -48,24 +48,31 @@ class MCPRemoteStreamlitClient:
         try :
             transport = StreamableHTTPTransport(url=server_url)
 
-            # Connect transport
-            await transport.connect()
+            # print(dir(transport))
+            print(dir(StreamableHTTPTransport))
+            print(dir(mcp.client.streamable_http))
 
-            # Get streams
-            read, write = transport.read, transport.write
+            logger.info(" Test calling handle_get_stream...")
+            read_stream = await transport.handle_get_stream()
+            logger.info(f"✅ Read stream: {type(read_stream)}")
 
-            session = await self.exit_stack.enter_async_context(
-                ClientSession(read, write)
-            )
+            logger.info(f"Test Post writer: {type(transport.post_writer)}")
+            write_stream = transport.post_writer
 
+
+            session = ClientSession(read_stream, write_stream)
+
+            # Initialize protocol mcp
             await session.initialize()
+
+            # Session storage
             self.sessions.append(session)
 
             # List and register tools
             response = await session.list_tools()
             tools = response.tools
             tool_names = [t.name for t in tools]
-            print(f"✓ Connected to '{server_url}' with {len(tools)} tools: {tool_names}")
+            logging.info(f"✅ Connected to '{server_url}' with {len(tools)} tools: {tool_names}")
 
             for tool in tools:
                 self.tool_to_session[tool.name] = session
@@ -76,7 +83,7 @@ class MCPRemoteStreamlitClient:
                 })
 
         except Exception as e:
-            print(f"❌ Failed to connect to '{server_url}': {e}")
+            logging.error(f"❌ Failed to connect to '{server_url}': {e}", exc_info=True)
 
 
     async def list_prompts(self):

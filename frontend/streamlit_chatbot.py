@@ -4,8 +4,8 @@ from pathlib import Path
 import sys
 sys.path.append(str(Path(__file__).parent.parent))
 
-from config.sse_config import SseConfigSTClient
-from core.mcp_client_sse import MCPRemoteStreamlitClient
+from config.http_config import HTTPConfigSTClient
+from core.mcp_client_http import MCPRemoteStreamlitClient
 
 # 1. Setup config
 st.set_page_config(
@@ -26,8 +26,8 @@ if not st.session_state.connected:
     with st.spinner("Connecting to backend..."):
         async def connect():
             chatbot = MCPRemoteStreamlitClient()
-            config = SseConfigSTClient()
-            await chatbot.connect_to_sse_server(config.backend_url)
+            config = HTTPConfigSTClient()
+            await chatbot.connect_to_http_server(config.backend_url)
             return chatbot
 
         st.session_state.chatbot = asyncio.run(connect())

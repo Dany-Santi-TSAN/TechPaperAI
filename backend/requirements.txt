@@ -4,6 +4,7 @@ mcp==1.23.3
 httpx==0.28.1
 
 arxiv==2.3.1
+pymupdf4llm==0.2.8
 
 # Format, lint, typing
 pyright==1.1.407
