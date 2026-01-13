@@ -1,13 +1,14 @@
 from dotenv import load_dotenv
 from anthropic import Anthropic
 from mcp import ClientSession
-from mcp.client.streamable_http import StreamableHTTPTransport
+from mcp.client.streamable_http import StreamableHTTPTransport, streamablehttp_client
 from mcp import SamplingMessageContentBlock, SamplingToolsCapability
 from typing import List, Dict, TypedDict, Callable, Optional
 from contextlib import AsyncExitStack
 import asyncio
 import nest_asyncio
 import logging
+import inspect
 
 from config.llm_config import LLMConfig
 from config.http_config import HTTPConfigSTClient
@@ -29,7 +30,6 @@ class ToolDefinition(TypedDict):
     description: str
     input_schema: dict
 
-
 class MCPRemoteStreamlitClient:
     """MCP Remote server for ChatBot AI with resources and prompts support."""
 
@@ -43,36 +43,66 @@ class MCPRemoteStreamlitClient:
         self.available_tools: List[ToolDefinition] = []
         self.tool_to_session: Dict[str, ClientSession] = {}
 
+    async def check_health(self) -> bool:
+        """
+        Verify MCP session is still alive.
+        Returns True if healthy, False otherwise
+        """
+        try:
+            if not self.sessions:
+                return False
+
+            session_dict = self.sessions[0]
+            logger.info(f" Raw self.sessions: {self.sessions[0]}")
+            session = session_dict["session"]
+
+            # healthcheck for connectivity
+            await asyncio.wait_for(session.list_tools()
+                                   , timeout=self.remote_config.health_check_timeout)
+            return True
+
+        except Exception as e:
+            logger.error(f"❌ Healthcheck failed: {e}")
+            return False
+
     async def connect_to_http_server(self, server_url: str):
         """Connect to remote MCP server via transport Streamable HTTP."""
         try :
-            transport = StreamableHTTPTransport(url=server_url)
+            logger.info(f"🔄 Attempting connection to {server_url}...")
 
-            # print(dir(transport))
-            print(dir(StreamableHTTPTransport))
-            print(dir(mcp.client.streamable_http))
+            client_ctx = await self.exit_stack.enter_async_context(
+                streamablehttp_client(server_url)
+            )
+            read_stream, write_stream, get_id_session = client_ctx
+            logger.info("✅ Streams created")
 
-            logger.info(" Test calling handle_get_stream...")
-            read_stream = await transport.handle_get_stream()
-            logger.info(f"✅ Read stream: {type(read_stream)}")
+            session = await self.exit_stack.enter_async_context(
+                ClientSession(read_stream, write_stream)
+            )
+            logger.info("✅ ClientSession created")
 
-            logger.info(f"Test Post writer: {type(transport.post_writer)}")
-            write_stream = transport.post_writer
-
-
-            session = ClientSession(read_stream, write_stream)
-
-            # Initialize protocol mcp
+            # Initialize session protocol mcp
             await session.initialize()
+            logger.info("✅ Session initialized")
+
+            # Get session ID
+            session_id = get_id_session()
+            logger.info(f"✅ Connected to '{server_url}' - Session ID: {session_id}")
 
             # Session storage
-            self.sessions.append(session)
+            self.sessions.append({
+                "session":session
+                ,"serveur_url":server_url
+                ,"session_id": session_id})
+            logger.info("✅ Session stored")
 
             # List and register tools
+            logger.info("🔄 Calling session.list_tools()...")
             response = await session.list_tools()
+            logger.info(f"✅ Received tools response: {type(response)}")
             tools = response.tools
             tool_names = [t.name for t in tools]
-            logging.info(f"✅ Connected to '{server_url}' with {len(tools)} tools: {tool_names}")
+            logger.info(f"✅ Connected with {len(tools)} tools: {tool_names}")
 
             for tool in tools:
                 self.tool_to_session[tool.name] = session
@@ -81,9 +111,11 @@ class MCPRemoteStreamlitClient:
                     "description": tool.description,
                     "input_schema": tool.inputSchema
                 })
+            logger.info("✅ All tools registered successfully")
 
         except Exception as e:
             logging.error(f"❌ Failed to connect to '{server_url}': {e}", exc_info=True)
+            raise
 
 
     async def list_prompts(self):
@@ -216,7 +248,7 @@ class MCPRemoteStreamlitClient:
                         tool_name,
                         arguments=tool_args,
                     )
-                    logger.info(f"✅ Tool result received : {type(tool_result)} ")
+                    logger.info(f"✅ Tool called : {tool_name} ")
                     logger.info(f"   Content: {tool_result.content[:200]}...")
 
                     tool_results_content.append(
@@ -242,21 +274,6 @@ class MCPRemoteStreamlitClient:
             )
             messages.append(
                 {"role": "user", "content": tool_results_content}
-            )
-
-            ###################################
-            # Guardrail 3 — Explicit stop instruction to the LLM
-            # Tell the model when to stop calling tools
-            ###################################
-            messages.append(
-                {
-                "role": "system",
-                "content": (
-                    "The tool results above are sufficient unless strictly necessary. "
-                    "Do NOT call the same tool again with similar arguments. "
-                    "If enough information is available, produce a final answer."
-                    ),
-                }
             )
 
             if on_update:

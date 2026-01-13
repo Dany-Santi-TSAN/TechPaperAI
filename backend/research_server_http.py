@@ -1,9 +1,10 @@
 import arxiv
 import json
 import os
-from typing import List
+from typing import List, Dict
 from fastmcp import FastMCP
 import logging
+from datetime import datetime, timezone
 
 logging.basicConfig(
     level=logging.INFO,
@@ -18,7 +19,7 @@ PAPER_DIR = "papers"
 mcp = FastMCP("research")
 
 @mcp.tool()
-def search_papers(topic: str, max_results: int = 5) -> List[str]:
+def search_papers(topic: str, max_results: int = 5) -> str:
     """
     Search for relevant arXiv based on a topic and store their information.
 
@@ -91,9 +92,9 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
             ,"summary": paper.summary
             ,"pdf_url": paper.pdf_url
             ,"published": str(paper.published.date())
+            ,"query_date": datetime.now(timezone.utc).strftime("%Y-%m-%d")
         }
         papers_info[paper_id] = paper_info
-
 
     # Save updated papers_info to json file
     with open(file_path, "w", encoding="utf-8") as json_file:
@@ -101,7 +102,12 @@ def search_papers(topic: str, max_results: int = 5) -> List[str]:
 
     logger.info(f"Results are saved in :{file_path}")
 
-    return [{"id": p_id, "title": info["title"]} for p_id, info in papers_info.items() if p_id in paper_ids]
+    structured_results = [{"id": p_id, "title": info["title"]} for p_id, info in papers_info.items() if p_id in paper_ids]
+    result_text = f"Found {len(structured_results)} papers on '{topic}':\n\n"
+    for paper in structured_results:
+        result_text += f"- [{paper['id']}] {paper['title']}\n"
+
+    return result_text
 
 
 @mcp.tool()
