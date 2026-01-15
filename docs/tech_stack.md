@@ -29,4 +29,4 @@ PyMuPDF4LLM : https://pymupdf.readthedocs.io/en/latest/pymupdf4llm/ — Recomman
 ## 4. Frameworks d'Orchestration (Agentic RAG)
 Pour construire la logique de "réflexion" de l'agent après l'extraction.
 
-LangGraph : https://langchain-ai.github.io/langgraph/ — Pour gérer les cycles de recherche/extraction/analyse.
+LangGraph : https://langchain-ai.github.io/langgraph/ — Pour gérer les cycles de recherche/extraction/analyse

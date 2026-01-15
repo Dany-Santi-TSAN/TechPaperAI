@@ -11,12 +11,16 @@ pyright==1.1.407
 nodeenv==1.10.0
 ruff==0.14.10
 
+# Schema
 openapi-pydantic==0.5.1
 
-arxiv==2.3.1
-
+# Observability
 langgraph==1.0.4
 langgraph-checkpoint==3.0.1
 langgraph-prebuilt==1.0.5
 langgraph-sdk==0.2.15
 langsmith==0.4.59
+logfire==4.18.0
+
+# Tests
+pytest==9.0.2
