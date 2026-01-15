@@ -26,7 +26,7 @@ class LLMConfig:
         - If user says 'search papers', use default max_results"""
 
     # safety guardrail
-    max_tool_call: int = 2
+    max_tool_call: int = 5
 
 @dataclass
 class LLMScienceValMod:
@@ -50,7 +50,7 @@ Output ONLY this JSON:
 }"""
 
     # safety guardrail
-    max_tool_call: int = 3
+    max_retries: int = 3
 
 @dataclass
 class LLMScoringPaper:
@@ -87,4 +87,4 @@ Output ONLY a JSON object:
 No preamble, no markdown, just the JSON."""
 
     # safety guardrail
-    max_tool_call: int = 2
+    max_retries: int = 2
